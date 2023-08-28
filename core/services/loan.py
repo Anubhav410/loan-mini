@@ -16,6 +16,9 @@ class LoanService:
 
     @staticmethod
     def approve_loan(approving_user, loan_id):
+        if not approving_user.is_staff:
+            raise ValidationError("You do not have permission for this operation")
+
         log.info(f"Approving Loan: {loan_id}")
         loan = LoanService.get_loan_by_id(loan_id)
         if loan.status != "pending":
