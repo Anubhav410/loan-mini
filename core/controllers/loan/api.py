@@ -9,6 +9,35 @@ from core.services.loan import LoanService
 
 class LoanAPIView:
     @staticmethod
+    @api_view(['POST'])
+    @authentication_classes([BasicAuthentication])
+    def approve_loan(request, loan_id):
+        if not request.user.is_staff:
+            return Response({"success": False, "message": "You do not have permission to perform this action"},
+                            status=HTTP_400_BAD_REQUEST)
+
+        loan = LoanService.approve_loan(request.user, loan_id)
+        return Response(LoanSerializer(loan).data, status=HTTP_200_OK)
+
+    @staticmethod
+    @api_view(['POST'])
+    @authentication_classes([BasicAuthentication])
+    def pay(request, loan_id, repayment_id):
+        loan = LoanService.pay(request.user, loan_id, repayment_id)
+        return Response(LoanSerializer(loan).data, status=HTTP_200_OK)
+
+    @staticmethod
+    @api_view(['POST'])
+    @authentication_classes([BasicAuthentication])
+    def deny_loan(request, loan_id):
+        if not request.user.is_staff:
+            return Response({"success": False, "message": "You do not have permission to perform this action"},
+                            status=HTTP_400_BAD_REQUEST)
+
+        loan = LoanService.deny_loan(request.user, loan_id)
+        return Response(LoanSerializer(loan).data, status=HTTP_200_OK)
+
+    @staticmethod
     @api_view(['POST', 'GET'])
     @authentication_classes([BasicAuthentication])
     def list_and_create_loan(request):
