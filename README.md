@@ -27,3 +27,29 @@ DB_PASS="psql password"
 
 ## Start Server
 `python manage.py runserver`
+
+
+# How to Test
+There are two ways to test. 
+1. Running Unit Tests
+2. Hitting server using postman
+
+## Running Unit Tests
+If the server and database is setup, then the tests can be run with the following command
+`python manage.py test`
+
+Tests are located in `core/tests_core/test_loan` file. 
+
+## Using Postman
+Link to Postman Collection : I have added a JSON of the Postman Collection with the Codebase. 
+It supports the following APIs
+1. Create User / SignUp
+2. Test Login (Tests if Basic Authentication is working )
+3. Create Loan
+4. List All Loans (If "STAFF" User is passed)
+5. List User Loans (If a "Cusotomer" User is passed)
+6. Approve Loan (Can only be called through STAFF user credentials)
+7. Deny Loan (Can only be called through STAFF user credentials)
+8. Pay Loan (Called from Customer Credentials)
+
+
