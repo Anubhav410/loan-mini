@@ -1,0 +1,6 @@
+DB_ENGINE=postgresql_psycopg2
+DB_HOST=localhost
+DB_NAME=aspire_db
+DB_USERNAME=root
+DB_PASS=root
+DB_PORT=5432
